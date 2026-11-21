@@ -1,4 +1,4 @@
-# Afterglow Cover Studio
+# 余晖封面工作室 / Afterglow Cover Studio
 
 [在线使用 / Open in browser](https://xialin99.github.io/makefun-afterglow-cover-studio/)
 
