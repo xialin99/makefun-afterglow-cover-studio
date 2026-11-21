@@ -1,5 +1,7 @@
 # Afterglow Cover Studio
 
+[在线使用 / Open in browser](https://xialin99.github.io/makefun-afterglow-cover-studio/)
+
 [中文](#中文) · [English](#english)
 
 ![Preview](screenshots/01-wide.jpg)
