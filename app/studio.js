@@ -145,7 +145,7 @@ function preview() {
 function makeOptions(id,items,change) {
   items.forEach((item,i)=>{
     const button=document.createElement('button');
-    button.textContent=item.name ?? item;
+    button.textContent=t(item.name ?? item);
     if(item.w){
       const dimensions=document.createElement('small');
       dimensions.textContent=item.w+' × '+item.h;
@@ -156,7 +156,7 @@ function makeOptions(id,items,change) {
       thumb.width=180;thumb.height=64;
       thumb.setAttribute('aria-hidden','true');
       const label=document.createElement('span');
-      label.textContent=item;
+      label.textContent=t(item);
       button.replaceChildren(thumb,label);
     }
     button.onclick=()=>{change(i);update();};
@@ -175,7 +175,11 @@ function update() {
   $('size').textContent=formats[format].w+' × '+formats[format].h;
   preview();
 }
-function status(message){$('status').textContent=message;}
+let statusText = () => t('Photos stay on this device.');
+function status(message){
+  statusText = typeof message === 'function' ? message : () => t(message);
+  $('status').textContent = statusText();
+}
 async function loadPhoto(file,index){
   if(!file) return;
   const revision=++revisions[index];
@@ -186,7 +190,7 @@ async function loadPhoto(file,index){
     await image.decode();
     if(revision!==revisions[index]) return;
     panels[index]=frame(image);
-    status(names[index]+' photo loaded.');
+    status(() => language === 'zh' ? '已载入' + t(names[index]) + '照片。' : names[index] + ' photo loaded.');
     update();
   }catch{
     if(revision===revisions[index]) status('Could not open that image. Try a JPEG, PNG or WebP.');
@@ -204,14 +208,16 @@ $('duplicate').onclick=()=>{
 $('demo').onclick=()=>{
   revisions.forEach((_,i)=>revisions[i]++);
   panels=demo.map(frame);
-  $('caption').value='DUSK RUN';
+  $('caption').value=t('DUSK RUN');
+  demoCaption=true;
   selected=1;grade=0;
   status('Demo artwork restored.');
   update();
 };
 $('reset').onclick=()=>{panels[selected]=frame(panels[selected].image);update();};
 $('zoom').oninput=e=>{panels[selected].zoom=Number(e.target.value);update();};
-$('caption').oninput=preview;
+let demoCaption = true;
+$('caption').oninput=()=>{demoCaption=false;preview();};
 
 function pointer(e) {
   const box=cover.getBoundingClientRect();
@@ -271,14 +277,22 @@ $('download').onclick=async ()=>{
     link.download='afterglow-'+current.name.toLowerCase()+'.png';
     link.click();
     setTimeout(()=>URL.revokeObjectURL(url),30000);
-    status('PNG downloaded · '+current.w+' × '+current.h);
+    status(() => t('PNG downloaded') + ' · ' + current.w + ' × ' + current.h);
   }catch{status('Could not create the PNG. Please try again.');}
   finally{button.disabled=false;}
 };
 
-makeOptions('panels',names,i=>selected=i);
-makeOptions('formats',formats,i=>format=i);
-makeOptions('grades',looks,i=>grade=i);
+function refreshLanguage(){
+  translateInterface();
+  if(demoCaption) $('caption').value=t('DUSK RUN');
+  for(const id of ['panels','formats','grades']) $(id).replaceChildren();
+  makeOptions('panels',names,i=>selected=i);
+  makeOptions('formats',formats,i=>format=i);
+  makeOptions('grades',looks,i=>grade=i);
+  $('status').textContent=statusText();
+  update();
+}
+$('language').onchange=event=>{setLanguage(event.target.value);refreshLanguage();};
+refreshLanguage();
 new ResizeObserver(preview).observe(cover.parentElement);
-update();
 document.fonts.ready.then(preview);
