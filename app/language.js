@@ -53,5 +53,5 @@ function translateInterface() {
 function setLanguage(value) {
   language = value === 'en' ? 'en' : 'zh';
   try { localStorage.setItem(languageKey, language); } catch {}
-  translateInterface();
+
 }

@@ -14,6 +14,8 @@
 
 用桌面 Chrome 打开 `app/index.html`，选择或拖入图片，调整构图后导出。
 
+页面默认显示简体中文，可以在界面选择 English。
+
 ## English
 
 An offline cover editor with image drop, crop, color grading, captions and multiple PNG output sizes.
@@ -22,7 +24,9 @@ An offline cover editor with image drop, crop, color grading, captions and multi
 
 Open `app/index.html` in desktop Chrome, select or drop a photo, adjust the framing, and export.
 
-[补充技术说明 / Additional technical notes](README.details.md)
+The interface opens in Simplified Chinese. Use the language menu to switch to English.
+
+[中文技术说明](README.details.zh.md) · [English technical notes](README.details.md)
 
 [make.fun 赛事 / Original bounty](https://make.fun/bounty/gta6-cover-art-01)
 
