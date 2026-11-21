@@ -8,6 +8,12 @@
 
 ## 中文
 
+### 第一次使用
+
+1. [打开封面编辑器](https://xialin99.github.io/makefun-afterglow-cover-studio/)。无需安装或登录。
+2. 点击一个画格，再点 **更换图片**。选择照片后拖动图片调整构图，用缩放滑块放大。
+3. 输入封面文字，选择横版、方形或竖版，然后点 **下载 PNG**。文件在浏览器的下载文件夹。
+
 离线封面编辑器，支持拖放图片、裁剪、调色、文字和多种尺寸的 PNG 导出。
 
 ### 本地运行
@@ -17,6 +23,12 @@
 页面默认显示简体中文，可以在界面选择 English。
 
 ## English
+
+### First use
+
+1. [Open the cover editor](https://xialin99.github.io/makefun-afterglow-cover-studio/). No installation or account is required.
+2. Choose a panel, click **Replace photo**, then drag or zoom to frame it.
+3. Enter a caption, choose an export size, and click **Download PNG**. Look in your browser’s downloads.
 
 An offline cover editor with image drop, crop, color grading, captions and multiple PNG output sizes.
 
